@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Retrieve the script's absolute path, even if the script was called via ../relative/path/to/script
+scriptdir=$(cd -P $(dirname "$0");pwd)
+echo "Running install from: ${scriptdir} "
+
+# Move all repo files to home directory
+dirtyrepocount=$(ls -a -1 | wc -l)
+dirtyhomecount=$(rsync -ic --exclude=".git" --dry-run ./.* $HOME | wc -l)
+
+repocount="$(($dirtyrepocount-2))" # exclude ./, ../
+homecount="$(($dirtyhomecount-0))" # only shows files in repo not in home
+
+if [ ! $repocount = $homecount ]
+then
+	read -p "WARNING: Stopped installation because configuration files found. Overwrite and continue? [y/N]: " -n1 -r
+	echo
+	if [[ ! $REPLY =~ ^[Yy]$ ]]
+	then
+		# exit script but not interactive shell
+		[[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+	fi
+fi
+
+# Actually move repo contents to $HOME
+rsync -av --exclude install --exclude README.md ./ $HOME
+
+# Delete this script and folder since everything is moved to $HOME
+read -p "Delete this folder (${scriptdir}) [y/N]: " -n1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+	rm -rf "${scriptdir:-/tmp/__UNDEFINED__}"  #deletes ${scriptdir}, if defined
+fi

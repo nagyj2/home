@@ -1,0 +1,14 @@
+# Ignore everything ...
+*
+
+# ... Except these config files...
+!*.bash_aliases
+!*.bashrc
+!*.gitconfig
+!*.vimrc
+
+# ... These scripts ...
+#!*.install
+
+# ... And gitignore itself
+!.gitignore

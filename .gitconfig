@@ -1,0 +1,70 @@
+[user]
+  email = github@jnagy.ca
+  name = Jason Nagy
+[core]
+  editor = vim
+  filemode = false
+  autocrlf = input
+  ignorecase = false
+[alias]
+  br = branch
+  co = checkout
+  ca = commit --amend
+  d = diff
+  dnc = diff --no-color
+  ds = diff --staged
+  f = fetch
+  fa = fetch --all
+  fp = fetch --prune
+  p = cherry-pick
+  ph = push
+  pho = push origin
+  pht = push --tags
+  r = reset
+  rba = rebase --abort
+  rbc = rebase --continue
+  rbi = rebase -i
+  rh = reset --hard
+  rha = reset HEAD .
+  st = status
+  llog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+  llg = llog --branches --remotes --tags
+  ll = llog -20 --abbrev=8
+  ri = "!git rebase -i HEAD~$1 #"
+  ridate = "!git rebase -i HEAD~$1 --exec \"git commit --amend --no-edit --date=now\" #"
+  conflicts = diff --name-only --diff-filter=U --relative
+[branch]
+  autosetuprebase = always
+[color]
+  status = auto
+  branch = auto
+  ui = auto
+#[color "diff"]
+#  commit = green bold
+#  frag = magenta bold
+#  meta = yellow bold
+#  new = green bold
+#  old = red bold
+#  whitespace = red reverse
+#[color "branch"]
+#  current = red
+#  local = yellow
+#  remote = green
+#[color "status"]
+#  added = green
+#  changed = yellow
+#  untracked = red
+[http]
+  sslVerify = true
+[init]
+  defaultBranch = master
+[push]
+	default = simple
+	recurseSubmodules = check
+[rebase]
+  autosquash = true
+  autostash = true
+[stash]
+  showPatch = true
+[submodule]
+  recurse = true
